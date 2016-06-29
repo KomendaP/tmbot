@@ -1,51 +1,74 @@
-var data = require('../data.json').findMe;
+var config = require('../data.json').findMe;
+var requestify = require('requestify');
+
+//Random search
+function getRandomRes(bot, message, options) {
+  var r = (Math.random() * 100 % 10), name, sufix;
+
+  if (r >= 0 && r < 2) {
+    name = 'Sport';
+    sufix = ' sport.';
+  } else if (r >= 2 && r < 4) {
+    name = 'Film';
+    sufix = ' films.';
+  } else if (r >= 4 && r < 6) {
+    name = 'Family';
+    sufix = ' family.';
+  } else if (r >= 6 && r < 8) {
+    name = 'Music';
+    sufix = ' music.';
+  } else if (r >= 8 && r <= 10) {
+    name = 'Play';
+    sufix = ' plays.';
+  }
+  options.classificationName = name;
+  bot.reply(message, 'You and your friends usually search for' + sufix);
+}
+
+// "events" is an array of Ticketmaster event information
+function eventInfo(events) {
+  var str = '', event, place, startDate, counter;
+
+  for (var i = 0; i < events.length; i++) {
+    event = events[i];
+    startDate = event.dates.start;
+    place = event._embedded.venues[0].name ? ['in', event._embedded.venues[0].name].join(' '): '';
+    counter = ['*', i + 1, '* -'].join('');
+    str = [
+      str,
+      counter,
+      event.name,
+      place,
+      '\n',
+      startDate.localTime,
+      startDate.localDate,
+      '\n\n'
+    ].join(' ');
+  }
+  return str;
+}
 
 module.exports = function (d2) {
   return function (bot, message) {
-    var keyword = message.match[1];
-    var options = {};
+    var keyword = message.match[1].trim(),
+      options = {};
+    console.error(keyword);
 
     console.log(message);
 
     if (!keyword) {
       keyword = '';
-      var r = Math.random();
-
-      if (r >= 0 && r < 0.2) {
-        options.classificationName = 'Sport';
-        bot.reply(message, 'You and your friends usually search for sport.');
-      }
-      if (r >= 0.2 && r < 0.4) {
-        options.classificationName = 'Film';
-        bot.reply(message, 'You and your friends usually search for films.');
-      }
-      if (r >= 0.4 && r < 0.6) {
-        options.classificationName = 'Family';
-        bot.reply(message, 'You and your friends usually search for family.');
-      }
-      if (r >= 0.6 && r < 0.8) {
-        options.classificationName = 'Music';
-        bot.reply(message, 'You and your friends usually search for music.');
-      }
-      if (r >= 0.8 && r <= 1) {
-        options.classificationName = 'Play';
-        bot.reply(message, 'You and your friends usually search for plays.');
-      }
+      getRandomRes(bot, message, options);
     }
 
     options.keyword = keyword;
-    options.size = 5;
+    options.size = config.options.quantity;
+
     d2.event
       .all(options)
       .then(function(events) {
-        // "events" is an array of Ticketmaster event information
-        var str = '';
-        for (var i = 0; i < events.length; i++){
-          //console.log(events[i]);
-          str = str + ' ' + (i + 1) + ' ' + events[i].name + ' in ' + events[i]._embedded.venues[0].name + '\n';
-          str = str + events[i].dates.start.localTime + ' ' + events[i].dates.start.localDate + '\n\n';
-        }
 
+        var str = eventInfo(events);
         console.log(str);
 
         bot.reply(message, str);
@@ -82,7 +105,6 @@ module.exports = function (d2) {
 
                     var ticket;
                     var estimated_need_time = 5;
-                    var requestify = require('requestify');
 
                     requestify.get('http://api.page2images.com/restfullink?p2i_size=480x720&p2i_screen=370x600&p2i_url=http://ticketmaster-api-staging.github.io/products-and-docs/widgets/event-discovery/oldskool/?id=' + events[i].id + '&p2i_key=887ae1bc9e2f335f')
                       .then(function(response) {
@@ -132,6 +154,9 @@ module.exports = function (d2) {
             convo.next();
           });
         });
+      })
+      .catch(function (err) {
+        bot.reply(message, 'Sorry, no results on your request!');
       });
   }
 };

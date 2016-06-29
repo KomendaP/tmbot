@@ -11,7 +11,7 @@ if (!NODE_ENV_TOKEN) {
 
 var d2 = TM('4xtBeBzeiKY7k73xilQsLxVpPpEAxhQh').discovery.v2;
 
-var controller = Botkit.slackbot({debug: true});
+var controller = Botkit.slackbot({debug: true/*, logLevel: 6*/});
 
 var bot = controller.spawn({
   token: process.env.token
@@ -23,6 +23,6 @@ controller.hears(['hello', 'hi'], config, require('./modules/hears/hello')(contr
 
 controller.hears(['help', 'how can I use you', 'who is you purpose', 'help me', 'guide'], config, require('./modules/hears/help'));
 
-controller.hears(['find me (.*)', 'surprise me'], config, require('./modules/hears/findMe')(d2));
+controller.hears(['find me(.*)?', 'surprise me'], config, require('./modules/hears/findMe')(d2));
 
 controller.hears(['test'], config, require('./modules/hears/test'));

@@ -12,7 +12,11 @@
     "Give me {classification name}",
     "Surprise me."
   ],
-  "findMe": {},
+  "findMe": {
+    "options": {
+      "quantity": 5
+    }
+  },
   "events": {},
   "whatsOn": {}
 }

@@ -6,6 +6,7 @@
   "dependencies": {
     "botkit": "^0.2.2",
     "os": "^0.1.1",
+    "requestify": "^0.1.17",
     "ticketmaster": "^0.3.0"
   },
   "devDependencies": {},
