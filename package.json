@@ -1,0 +1,25 @@
+{
+  "name": "tmbot",
+  "version": "1.0.0",
+  "description": "TM slack bot.",
+  "main": "tmbot.js",
+  "dependencies": {
+    "botkit": "^0.2.2",
+    "os": "^0.1.1",
+    "ticketmaster": "^0.3.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/degratnik/tmbot.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/degratnik/tmbot/issues"
+  },
+  "homepage": "https://github.com/degratnik/tmbot#readme"
+}

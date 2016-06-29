@@ -1,0 +1,18 @@
+{
+  "hello": {
+    "msg":  [
+      "Hello. How are you?"
+    ]
+  },
+  "help": [
+    "*Type:*",
+    "Find me {keyword}",
+    "What on {city}",
+    "Events (today|tomorrow,this week|next week)",
+    "Give me {classification name}",
+    "Surprise me."
+  ],
+  "findMe": {},
+  "events": {},
+  "whatsOn": {}
+}
