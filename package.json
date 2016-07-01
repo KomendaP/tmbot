@@ -5,12 +5,18 @@
   "main": "tmbot.js",
   "dependencies": {
     "botkit": "^0.2.2",
-    "os": "^0.1.1",
     "requestify": "^0.1.17",
     "ticketmaster": "^0.3.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "babel-core": "^6.10.4",
+    "babel-loader": "^6.2.4",
+    "babel-preset-es2015": "^6.9.0",
+    "json-loader": "^0.5.4",
+    "webpack": "^1.13.1"
+  },
   "scripts": {
+    "run": "webpack --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

@@ -1,4 +1,4 @@
-var data = require('../data.json').hello;
+var data = require('../config.json').hello;
 
 module.exports = function (controller, d2) {
   return function (bot, message) {

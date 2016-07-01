@@ -1,0 +1,37 @@
+{
+  "hello": {
+    "msg":  [
+      "Hello. How are you?"
+    ]
+  },
+  "help": [
+    "*Type:*",
+    "Find me {keyword}",
+    "What on {city}",
+    "Events (today|tomorrow,this week|next week)",
+    "Give me {classification name}",
+    "Surprise me."
+  ],
+  "findMe": {
+    "reqUrl": {
+      "base": "http://api.page2images.com/restfullink?p2i_size=480x720&p2i_screen=370x600&p2i_url=http://ticketmaster-api-staging.github.io/products-and-docs/widgets/event-discovery/oldskool/?id=",
+      "sufix": "&p2i_key=887ae1bc9e2f335f"
+    },
+    "randomOptions": [
+      "Sport",
+      "Film",
+      "Family",
+      "Music",
+      "Play"
+    ],
+    "conversation": {
+      "questions": [],
+      "expr": []
+    },
+    "options": {
+      "quantity": 5
+    }
+  },
+  "events": {},
+  "whatsOn": {}
+}
